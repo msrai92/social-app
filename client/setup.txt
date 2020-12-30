@@ -1,0 +1,96 @@
+npm init //create package.json 
+npm install webpack webpack-cli webpack-dev-server babel-loader css-loader style-loader html-webpack-plugin --save-dev
+
+
+npm install @babel/core @babel/preset-env @babel/preset-react --save-dev 
+//babel core is main part, preset-env is preset defining new js features to transpile, babel-loader is package to enable babel to work 
+//with webpack 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+SASS
+npm install --save-dev node-sass sass-loader style-loader css-loader mini-css-extract-plugin
+node-sass provides binding for Node.js to LibSass, a Sass compiler.
+sass-loader is a loader for Webpack for compiling SCSS/Sass files.
+style-loader injects our styles into our DOM.
+css-loader interprets @import and @url() and resolves them.
+mini-css-extract-plugin extracts our CSS out of the JavaScript bundle into a separate file, essential for production builds.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+--create .babelrc file 
+{
+    "presets": ["@babel/preset-env",  "@babel/preset-react"],
+    "plugins": [
+        "@babel/plugin-proposal-class-properties"
+        
+    ]
+}
+
+--create index.js, index.html and app.js file 
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App';
+
+ReactDOM.render(<App/>, document.getElementById('root'));
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Social App</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
+
+-- create webpack.config.js file 
+
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    path: path.join(__dirname, "/dist"),
+    filename: "bundle.js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
+          test: /\.css$/,
+          use: [
+              {
+                  loader: 'style-loader'
+              },
+              {
+                  loader: 'css-loader'
+              }
+          ]
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html"
+    })
+  ]
+};
