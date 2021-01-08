@@ -1,10 +1,25 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "../styles/main.scss";
+import Navbar from '../components/layout/Navbar';
+import Landing from '../components/layout/Landing';
+import Register from '../components/auth/Register';
+import Login from '../components/auth/Login'
+
 const App = () => {
     return(
-        <div>
-            <p>App is running</p>
-        </div>
+        <Router>
+            <Fragment>
+                <Navbar/>
+                <Route exact path="/landing" component={Landing}/>
+                <section className="container">
+                    <Switch>
+                        <Route exact path="/register" component={Register}/>
+                        <Route exact path="/login" component={Login}/>
+                    </Switch>
+                </section>
+            </Fragment>
+        </Router>
     )
 }
 /*function App(){
