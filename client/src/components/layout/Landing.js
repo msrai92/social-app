@@ -5,7 +5,7 @@ import "../../styles/main.scss";
 function Landing(){
     return(
         <div>
-            <p>This is the Landing page</p>
+            Landing
         </div>
     )
 }
