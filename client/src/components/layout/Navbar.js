@@ -14,7 +14,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout}) => {
                 <NavLink activeClassName="selected-link" exact to="/dashboard" className="nav-sub-link">dashboard</NavLink>
             </li>
             <li className="nav-sub-item">
-                <NavLink onClick={logout} activeClassName="selected-link" exact to="/logout" className="nav-sub-link">logout</NavLink>
+                <NavLink onClick={logout} activeClassName="selected-link" exact to="/landing" className="nav-sub-link">logout</NavLink>
             </li>
         </ul>
     );
@@ -34,7 +34,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout}) => {
     return (
         <nav className="navbar">  
             <div className="nav-logo">
-                <p className="logo">Logo</p>
+                <NavLink activeClassName="selected-link" exact to="/" >logo</NavLink>
             </div>
             <div className="nav-btn">
                 <div onClick={handleClick} className={click ? 'menu-btn-open' : 'menu-btn'}>
